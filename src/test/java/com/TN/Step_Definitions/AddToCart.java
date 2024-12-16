@@ -2,11 +2,9 @@ package com.TN.Step_Definitions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import driver_factory.DriverFactory;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,15 +14,9 @@ public class AddToCart {
 	
 public WebDriver driver;
 	
-	@Before
-	public void open_application() {
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-	}
-	
 	@Given("user navigates to LandingPage to add valid product")
 	public void user_navigates_to_LandingPage_to_add_valid_product() {
-		driver.get("https://tutorialsninja.com/demo");
+		driver = DriverFactory.getDriver();
 	}
 
 	@When("user enters product search {string}")
@@ -58,9 +50,4 @@ public WebDriver driver;
 		Assert.assertTrue(driver.findElement(By.xpath("//div[contains(@class, 'alert-success')]")).isDisplayed());
 	}
 		
-	@After
- 	public void tearDown() {
- 		driver.quit();
- 	}
-	
 }

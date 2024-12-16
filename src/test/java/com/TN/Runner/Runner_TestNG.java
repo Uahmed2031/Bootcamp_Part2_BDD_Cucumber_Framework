@@ -5,11 +5,14 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
 		dryRun = false,
-		features = "src/test/resources/feature_files/Login.feature",
+		features = {"src/test/resources/feature_files"},
 		glue = {"com.TN.Step_Definitions", "hooks"},
-		tags = "@TutorialsNinjaLogin",
+		tags = "@TutorialsNinjaLogin or @TutorialsNinjaRegister or @TutorialsNinjaSearchProduct or @TutorialsNinjaAddToCart or @TutorialsNinjaLogout",
 		monochrome = true,
-		plugin = {"pretty", "html:target/site/cucumber/cucumber.html", "json:target/cucumber1.json"}
+		//plugin = {"html:test-output\\ExtentReportBDD.html"}
+		
+		plugin = { "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
+
 		)
 
 public class Runner_TestNG extends AbstractTestNGCucumberTests{

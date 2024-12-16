@@ -2,10 +2,9 @@ package com.TN.Step_Definitions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+
+import driver_factory.DriverFactory;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,16 +14,10 @@ public class Logout {
 		
 		public WebDriver driver;
 		
-		@Before
-		public void open_application() {
-			driver = new ChromeDriver();
-			driver.manage().window().maximize();
-			driver.get("https://tutorialsninja.com/demo");
-			driver.findElement(By.linkText("My Account")).click();
-		}
-
 		@Given("user navigates to the LoginPage")
 		public void user_navigates_to_the_loginpage() {
+			driver = DriverFactory.getDriver();
+			driver.findElement(By.linkText("My Account")).click();
 			driver.findElement(By.linkText("Login")).click();
 		}
 
@@ -58,8 +51,4 @@ public class Logout {
 			Assert.assertTrue(driver.findElement(By.xpath("//h1[text() = 'Account Logout']")).isDisplayed());
 		}
 		
-		@After
-	 	public void tearDown() {
-	 		driver.quit();
-	 	}		
 	}

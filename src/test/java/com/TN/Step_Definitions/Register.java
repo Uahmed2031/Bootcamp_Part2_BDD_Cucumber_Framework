@@ -1,14 +1,14 @@
 package com.TN.Step_Definitions;
 
 import java.util.Map;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+
 import Utils.Util;
+import driver_factory.DriverFactory;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -18,16 +18,10 @@ public class Register {
 	
 public WebDriver driver;
 	
-	@Before
-	public void open_application() {
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.get("https://tutorialsninja.com/demo");
-		driver.findElement(By.linkText("My Account")).click();
-	}
-	
 	@Given("user navigates to RegisterPage")
 	public void user_navigates_to_registerpage() {
+		driver = DriverFactory.getDriver();
+		driver.findElement(By.linkText("My Account")).click();
 		driver.findElement(By.linkText("Register")).click();
 	}
 
@@ -61,10 +55,5 @@ public WebDriver driver;
  	public void user_is_redirected_to_accountsuccesspage() {
  		Assert.assertTrue(driver.findElement(By.xpath("//p[text() = 'Congratulations! Your new account has been successfully created!']")).isDisplayed());
   	}
- 	
- 	@After
- 	public void tearDown() {
- 		driver.quit();
- 	}
- 	
+ 	 	
 }
